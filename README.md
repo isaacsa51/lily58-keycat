@@ -2,6 +2,8 @@
 
 This is a combination of the default Lily58 layout / configs / etc combined with https://github.com/jordi-7/qmk_firmware/tree/master/keyboards/lily58/keymaps/jgr.
 
+<img title="Layout" alt="Layout" src="/res/layout.png">
+
 I could not get their version working but managed to adapt their code in with a default layout to eventually achieve a working product.
 
 This SHOULD compile and run with no issues assuming:
