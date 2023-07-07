@@ -30,9 +30,11 @@ This keymap adds a Bongo Cat animation loop on the right OLED:
 ## Extras
 
 - Currently have a SELWORD keycode to select the entire word of the sentence where the cursor is at.
+- Added a `TG()` layer that toggles the QWERTY layout.
 
 ## TODO
 
+- In QWERTY layout the `RAISE ` & `LOWER` doesn't activate.
 - Currently, the left OLED falls asleep on its own, and the timeout does not match that of the right side. An end goal would be to have these sides sleep together and wake together.
 - Leader key acros still missing.
 - Detection of which OS is currently connected to and be able to re-arrange the modifiers keys is still missing.
