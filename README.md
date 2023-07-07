@@ -27,11 +27,17 @@ This keymap adds a Bongo Cat animation loop on the right OLED:
 
 *Please note that the "WPM" counter is more for fun than for getting realistic WPM numbers from.*
 
+## Extras
+
+- Currently have a SELWORD keycode to select the entire word of the sentence where the cursor is at.
+
 ## TODO
 
 - Currently, the left OLED falls asleep on its own, and the timeout does not match that of the right side. An end goal would be to have these sides sleep together and wake together.
 - Leader key acros still missing.
 - Detection of which OS is currently connected to and be able to re-arrange the modifiers keys is still missing.
+- Implement [QMK Caps Word](https://docs.qmk.fm/#/feature_caps_word) to minimize the use of the pinky shifts that the keeb has.
+- Implement macros to put `(<cursor>)`, `[<cursor>]`, `{<cursor>}` like any IDE.
 
 ## Compiling
 
