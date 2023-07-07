@@ -13,9 +13,9 @@ This SHOULD compile and run with no issues assuming:
   * No RGB or underglow of any kind
   * Left-side as `master`
 
-# What does this do?
+## What does this do?
 
-`keymap.c` in a previous commit used the original layout -- utilize that if desired. The latest commit in this repository has a customized RAISE layer (specifically the NAV cluster on the right side) -- if this is undesirable, please use an older commit with the original layout or alter the layout yourself in a fork!
+`keymap.c` is the main file where the configuration is programmed within the macros and OLED display -- if this is undesirable, please use an older commit with the original layout or alter the layout yourself in a fork!
 
 This keymap adds text to the left OLED to show your current estimated WPM, as well as what layer you are on.
 
@@ -27,11 +27,13 @@ This keymap adds a Bongo Cat animation loop on the right OLED:
 
 *Please note that the "WPM" counter is more for fun than for getting realistic WPM numbers from.*
 
-# Future Improvements
+## TODO
 
 - Currently, the left OLED falls asleep on its own, and the timeout does not match that of the right side. An end goal would be to have these sides sleep together and wake together.
+- Leader key acros still missing.
+- Detection of which OS is currently connected to and be able to re-arrange the modifiers keys is still missing.
 
-# Compiling
+## Compiling
 
 For the RP2040 controller, you would have to change a few things in the config and rules files. Telling it to compile for the RP2040 and possibly change the naming of the pins used. Docs [here.](https://docs.qmk.fm/#/feature_converters?id=converters)
 
