@@ -34,9 +34,9 @@ This keymap adds a Bongo Cat animation loop on the right OLED:
 
 ## TODO
 
-- In QWERTY layout the `RAISE ` & `LOWER` doesn't activate.
+- In QWERTY layout the `RAISE` & `LOWER` doesn't activate.
 - Currently, the left OLED falls asleep on its own, and the timeout does not match that of the right side. An end goal would be to have these sides sleep together and wake together.
-- Leader key acros still missing.
+- Leader key macros still missing.
 - Detection of which OS is currently connected to and be able to re-arrange the modifiers keys is still missing.
 - Implement [QMK Caps Word](https://docs.qmk.fm/#/feature_caps_word) to minimize the use of the pinky shifts that the keeb has.
 - Implement macros to put `(<cursor>)`, `[<cursor>]`, `{<cursor>}` like any IDE.
