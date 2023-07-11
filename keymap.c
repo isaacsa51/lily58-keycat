@@ -8,9 +8,9 @@
 #define TAP_FRAMES 2
 #define TAP_SPEED 40
 
-# define MIN_WALK_SPEED      05
+# define MIN_prep_SPEED      05
 # define MIN_RUN_SPEED       15
-# define ANIM_FRAME_DURATION 450    // how long each frame lasts in ms
+# define ANIM_FRAME_DURATION 375    // how long each frame lasts in ms
 # define ANIM_SIZE           1024   // number of bytes in array. If you change sprites, minimize for adequate firmware size. max is 1024
 
 #ifdef OLED_DRIVER_ENABLE
@@ -34,16 +34,19 @@ enum layer_number {
 
 enum custom_keycodes {
   SELWORD = SAFE_RANGE,
-  TD_ALT
+};
+
+enum {
+    TD_CAPS
 };
 
 const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
- [_COLEMAK] = LAYOUT(
-  KC_ESC,   KC_1,   KC_2,    KC_3,    KC_4,    KC_5,                     KC_6,    KC_7,    KC_8,    KC_9,    KC_0,    KC_EQL,
-  KC_TAB,   KC_Q,   KC_W,    KC_F,    KC_P,    KC_B,                     KC_J,    KC_L,    KC_U,    KC_Y,    KC_SCLN, KC_MINS,
-  KC_LCTL,  KC_A,   KC_R,    KC_S,    KC_T,    KC_G,                     KC_M,    KC_N,    KC_E,    KC_I,    KC_O,    KC_QUOT,
-  KC_LSFT,  KC_Z,   KC_X,    KC_C,    KC_D,    KC_V, KC_LBRC,  KC_RBRC,  KC_K,    KC_H,    KC_COMM, KC_DOT,  KC_SLSH,  KC_RSFT,
-                        KC_LGUI, TT(_LOWER), TD(TD_ALT),KC_SPC,   KC_ENT, KC_BSPC, TT(_RAISE),TO(_QWERTY)
+[_COLEMAK] = LAYOUT(
+  KC_ESC,           KC_1,   KC_2,    KC_3,    KC_4,    KC_5,                     KC_6,    KC_7,    KC_8,    KC_9,    KC_0,    KC_EQL,
+  KC_TAB,           KC_Q,   KC_W,    KC_F,    KC_P,    KC_B,                     KC_J,    KC_L,    KC_U,    KC_Y,    KC_SCLN, KC_MINS,
+  KC_LCTL,          KC_A,   KC_R,    KC_S,    KC_T,    KC_G,                     KC_M,    KC_N,    KC_E,    KC_I,    KC_O,    KC_QUOT,
+  TD(TD_CAPS),      KC_Z,   KC_X,    KC_C,    KC_D,    KC_V, KC_LBRC,  KC_RBRC,  KC_K,    KC_H,    KC_COMM, KC_DOT,  KC_SLSH, KC_RSFT,
+                                KC_LGUI, TT(_LOWER), KC_ALGR,KC_SPC,   KC_ENT, KC_BSPC, TT(_RAISE),TO(_QWERTY)
 ),
 [_LOWER] = LAYOUT(
   _______, _______, _______, _______, _______, _______,                   _______, _______, _______,_______, _______, _______,
@@ -81,8 +84,7 @@ layer_state_t layer_state_set_user(layer_state_t state) {
 
 // Tap Dance definitions
 tap_dance_action_t tap_dance_actions[] = {
-    // Tap once for Escape, twice for Caps Lock
-    [TD_ALT] = ACTION_TAP_DANCE_DOUBLE(KC_LALT, KC_ALGR),
+    [TD_CAPS] = ACTION_TAP_DANCE_DOUBLE(KC_LSFT, KC_CAPS),
 };
 
 #ifdef OLED_ENABLE
@@ -117,7 +119,7 @@ bool isJumping  = false;
 bool showedJump = true;
 
 static void render_kiry(int KIRY_X, int KIRY_Y) {
-    static const char PROGMEM sit[2][ANIM_SIZE] = {
+    static const char PROGMEM sleep[2][ANIM_SIZE] = {
         {0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x80, 0x80, 0x80, 0x80, 0x80, 0x80, 0x00, 0x00, 
 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 
 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x08, 0x88, 0x8e, 0x4a, 0x49, 0xc8, 0x60, 0x30, 
@@ -137,7 +139,7 @@ static void render_kiry(int KIRY_X, int KIRY_Y) {
 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x01, 0x02, 0x04, 0x04, 0x04, 0x04, 0x04, 0x0c, 0x0a, 0x09, 
 0x0e, 0x0a, 0x0e, 0x0a, 0x0e, 0x06, 0x07, 0x0e, 0x09, 0x0b, 0x0e, 0x0b, 0x0b, 0x0c, 0x07, 0x00}};
 
-    static const char PROGMEM walk[2][ANIM_SIZE] = {{0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0xf8, 0x38, 0x10, 0x30, 0x20, 0x20, 0x40, 
+    static const char PROGMEM prep[2][ANIM_SIZE] = {{0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0xf8, 0x38, 0x10, 0x30, 0x20, 0x20, 0x40, 
 0x80, 0x80, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 
 0x00, 0x00, 0x03, 0x0f, 0x13, 0xe3, 0x82, 0x8a, 0x8a, 0x1f, 0x04, 0x62, 0x10, 0x88, 0x40, 0x40, 
 0x00, 0x00, 0x01, 0xfe, 0xff, 0x15, 0x9e, 0xd0, 0x60, 0x40, 0x80, 0x00, 0x00, 0x00, 0x00, 0x00, 
@@ -177,7 +179,7 @@ static void render_kiry(int KIRY_X, int KIRY_Y) {
 0x01, 0x01, 0x03, 0x03, 0x02, 0x05, 0x0a, 0x0a, 0x05, 0x04, 0x0a, 0x09, 0x0a, 0x04, 0x00, 0x00
                                                    }};
 
-    static const char PROGMEM bark[2][ANIM_SIZE] = {{0x00, 0x20, 0x20, 0x40, 0x40, 0x82, 0x84, 0x08, 0x10, 0x80, 0x60, 0x38, 0x1c, 0x38, 0x30, 0xc0, 
+    static const char PROGMEM alert[2][ANIM_SIZE] = {{0x00, 0x20, 0x20, 0x40, 0x40, 0x82, 0x84, 0x08, 0x10, 0x80, 0x60, 0x38, 0x1c, 0x38, 0x30, 0xc0, 
 0x80, 0xc0, 0x30, 0x38, 0x1c, 0x38, 0x60, 0x80, 0x08, 0x84, 0x82, 0x40, 0x40, 0x20, 0x20, 0x00, 
 0x04, 0x04, 0x04, 0x04, 0x00, 0x00, 0x00, 0x00, 0x00, 0x3f, 0x40, 0xa0, 0x20, 0x2e, 0x00, 0x00, 
 0x20, 0x00, 0x00, 0x2e, 0x20, 0xa0, 0x40, 0x3f, 0x00, 0x00, 0x00, 0x04, 0x04, 0x04, 0x04, 0x00, 
@@ -218,10 +220,8 @@ static void render_kiry(int KIRY_X, int KIRY_Y) {
                                                      }};
 
     /* animation */
-    void animate_luna(void) {
-        /* jump */
+    void animate_kiry(void) {
         if (isJumping || !showedJump) {
-            /* clear */
             oled_set_cursor(KIRY_X, KIRY_Y + 2);
             oled_write("     ", false);
 
@@ -229,32 +229,28 @@ static void render_kiry(int KIRY_X, int KIRY_Y) {
 
             showedJump = true;
         } else {
-            /* clear */
             oled_set_cursor(KIRY_X, KIRY_Y - 1);
             oled_write("     ", false);
 
             oled_set_cursor(KIRY_X, KIRY_Y);
         }
 
-        /* switch frame */
         current_frame = (current_frame + 1) % 2;
 
-        /* current status */
         if (led_usb_state.caps_lock) {
-            oled_write_raw_P(bark[current_frame], ANIM_SIZE);
+            oled_write_raw_P(alert[current_frame], ANIM_SIZE);
         } else if (isSneaking) {
             oled_write_raw_P(sneak[current_frame], ANIM_SIZE);
-        } else if (current_wpm <= MIN_WALK_SPEED) {
-            oled_write_raw_P(sit[current_frame], ANIM_SIZE);
+        } else if (current_wpm <= MIN_prep_SPEED) {
+            oled_write_raw_P(sleep[current_frame], ANIM_SIZE);
         } else if (current_wpm <= MIN_RUN_SPEED) {
-            oled_write_raw_P(walk[current_frame], ANIM_SIZE);
+            oled_write_raw_P(prep[current_frame], ANIM_SIZE);
         } else {
             oled_write_raw_P(run[current_frame], ANIM_SIZE);
         }
     }
 
 #    if OLED_TIMEOUT > 0
-    /* the animation prevents the normal timeout from occuring */
     if (last_input_activity_elapsed() > OLED_TIMEOUT && last_led_activity_elapsed() > OLED_TIMEOUT) {
         oled_off();
         return;
@@ -263,10 +259,9 @@ static void render_kiry(int KIRY_X, int KIRY_Y) {
     }
 #    endif
 
-    /* animation timer */
     if (timer_elapsed32(anim_timer) > ANIM_FRAME_DURATION) {
         anim_timer = timer_read32();
-        animate_luna();
+        animate_kiry();
     }
 }
 
@@ -335,7 +330,6 @@ void render_mod_status_gui_alt(uint8_t modifiers) {
         oled_write_P(alt_off_2, false);
     }
 }
-
 
 void render_mod_status_ctrl_shift(uint8_t modifiers) {
     static const char PROGMEM ctrl_off_1[] = {0x89, 0x8a, 0};
@@ -407,9 +401,13 @@ void render_space(void) {
     oled_write_P(PSTR("     "), false);
 }
 
-// Second screen
-static void print_logo_narrow(void) {
+static void display_secondary_oled(void) {
     render_logo();
+    render_space();
+    render_space();
+    render_space();
+    oled_set_cursor(0, 7);
+    render_space();
 
     /* wpm counter */
     uint8_t n = get_current_wpm();
@@ -425,17 +423,15 @@ static void print_logo_narrow(void) {
     oled_write(" wpm", false);
 }
 
-static void print_status_narrow(void) {
-    /* Print current mode */
-    oled_set_cursor(0, 0);
+static void display_primary_oled(void) {
     if (keymap_config.swap_lctl_lgui) {
         oled_write_raw_P(mac_logo, sizeof(mac_logo));
     } else {
         oled_write_raw_P(windows_logo, sizeof(windows_logo));
     }
-
+    render_space();
     oled_set_cursor(0, 3);
-
+    render_space();
     switch (get_highest_layer(default_layer_state)) {
         case _COLEMAK: 
             oled_write(" LILY", false);
@@ -492,17 +488,15 @@ static void print_status_narrow(void) {
 oled_rotation_t oled_init_user(oled_rotation_t rotation) { return OLED_ROTATION_270; }
 
 bool oled_task_user(void) {
-    /* KEYBOARD PET VARIABLES START */
-
     current_wpm   = get_current_wpm();
     led_usb_state = host_keyboard_led_state();
 
-    /* KEYBOARD PET VARIABLES END */
-
     if (is_keyboard_master()) {
-        print_status_narrow();
+        display_primary_oled();
     } else {
-        print_logo_narrow();
+        render_mod_status_gui_alt(get_mods()|get_oneshot_mods());
+        render_mod_status_ctrl_shift(get_mods()|get_oneshot_mods());
+        display_secondary_oled();
     }
     return false;
 }
