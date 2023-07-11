@@ -6,8 +6,6 @@ BOOTLOADER = rp2040
 EXTRAFLAGS += -flto
 BOOTMAGIC_ENABLE = no       # Enable Bootmagic Lite
 MOUSEKEY_ENABLE = yes       # Mouse keys
-UNICODE_ENABLE = yes
-LEADER_KEY = yes
 EXTRAKEY_ENABLE = yes        # Audio control and System control
 CONSOLE_ENABLE = no         # Console for debug
 COMMAND_ENABLE = no         # Commands for debug and configuration
@@ -18,6 +16,7 @@ RGBLIGHT_ENABLE = no       # Enable WS2812 RGB underlight.
 SWAP_HANDS_ENABLE = no      # Enable one-hand typing
 OLED_ENABLE = yes     # OLED display
 WPM_ENABLE = yes
+TAP_DANCE_ENABLE = yes
 
 SRC += features/select_word.c
 
