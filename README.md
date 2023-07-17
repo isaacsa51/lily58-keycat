@@ -1,5 +1,4 @@
-# Lily58 BongoCat + WPM + Layer Indicator
-
+# Lily58 Kiry Pet + WPM Counter
 This is a combination of the default Lily58 layout / configs / etc combined with https://github.com/Rwarcards762/lily58_bongocat.
 
 <img title="Layout" alt="Layout" src="/res/layout.png">
