@@ -28,57 +28,51 @@ enum layer_number {
     _COLEMAK = 0,
     _LOWER,
     _RAISE,
-    _QWERTY,
-    _GAME,
     _MAC,
+    _ADJUST,
 };
 
 enum custom_keycodes {
     SELWORD = SAFE_RANGE,
+    DSKL,
+    DSKR,
 };
 
 const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
     [_COLEMAK] = LAYOUT(
-        KC_ESC,  KC_1,   KC_2,    KC_3,    KC_4,    KC_5,                     KC_6,    KC_7,    KC_8,    KC_9,    KC_0,    KC_EQL,
-        KC_TAB,  KC_Q,   KC_W,    KC_F,    KC_P,    KC_B,                     KC_J,    KC_L,    KC_U,    KC_Y,    KC_SCLN, KC_MINS,
-        KC_LCTL, KC_A,   KC_R,    KC_S,    KC_T,    KC_G,                     KC_M,    KC_N,    KC_E,    KC_I,    KC_O,    KC_QUOT,
-        KC_LSFT, KC_Z,   KC_X,    KC_C,    KC_D,    KC_V, KC_LBRC,  KC_RBRC,  KC_K,    KC_H,    KC_COMM, KC_DOT,  KC_SLSH, KC_RSFT,
-                              KC_LGUI, TT(_LOWER),KC_RALT, KC_SPC,   KC_ENT,  KC_BSPC, TT(_RAISE),DF(_QWERTY)
-    ),
-    [_QWERTY] = LAYOUT(
-        KC_ESC,   KC_1,   KC_2,    KC_3,    KC_4,    KC_5,                     KC_6,    KC_7,    KC_8,    KC_9,    KC_0,    KC_GRV,
-        KC_TAB,   KC_Q,   KC_W,    KC_E,    KC_R,    KC_T,                     KC_Y,    KC_U,    KC_I,    KC_O,    KC_P,    KC_MINS,
-        KC_LCTL,  KC_A,   KC_S,    KC_D,    KC_F,    KC_G,                     KC_H,    KC_J,    KC_K,    KC_L,    KC_SCLN, KC_QUOT,
-        KC_LSFT,  KC_Z,   KC_X,    KC_C,    KC_V,    KC_B, KC_LBRC,  KC_RBRC,  KC_N,    KC_M,    KC_COMM, KC_DOT,  KC_SLSH, KC_RSFT,
-                                KC_LGUI, MO(_LOWER), KC_LALT,KC_SPC,   KC_ENT, KC_BSPC, MO(_RAISE), DF(_COLEMAK)
-    ),
-    [_GAME] = LAYOUT(
-        KC_ESC,   KC_1,   KC_2,    KC_3,    KC_4,    KC_5,                     KC_6,    KC_7,    KC_8,    KC_9,    KC_0,    KC_GRV,
-        KC_TAB,   KC_Q,   KC_W,    KC_E,    KC_R,    KC_T,                     KC_Y,    KC_U,    KC_I,    KC_O,    KC_P,    KC_MINS,
-        KC_LSFT,  KC_A,   KC_S,    KC_D,    KC_F,    KC_G,                     KC_H,    KC_J,    KC_K,    KC_L,    KC_SCLN, KC_QUOT,
-        KC_LCTL,  KC_Z,   KC_X,    KC_C,    KC_V,    KC_B, KC_LBRC,  KC_RBRC,  KC_N,    KC_M,    KC_COMM, KC_DOT,  KC_SLSH, KC_RSFT,
-                                KC_LGUI, MO(_LOWER), KC_LALT,KC_SPC,   KC_ENT, KC_BSPC, MO(_RAISE), DF(_COLEMAK)
+        KC_ESC,   KC_1,   KC_2,    KC_3,    KC_4,    KC_5,                     KC_6,    KC_7,    KC_8,    KC_9,    KC_0,    KC_EQL,
+        KC_TAB,   KC_Q,   KC_W,    KC_F,    KC_P,    KC_B,                     KC_J,    KC_L,    KC_U,    KC_Y,    KC_SCLN, KC_MINS,
+        KC_LSFT,  KC_A,   KC_R,    KC_S,    KC_T,    KC_G,                     KC_M,    KC_N,    KC_E,    KC_I,    KC_O,    KC_QUOT,
+        KC_LCTL,  KC_Z,   KC_X,    KC_C,    KC_D,    KC_V, KC_LBRC,  KC_RBRC,  KC_K,    KC_H,    KC_COMM, KC_DOT,  KC_SLSH, KC_RSFT,
+                              KC_LGUI, TT(_LOWER), RALT_T(KC_LALT), KC_SPC,   KC_ENT,  KC_BSPC, TT(_RAISE),DF(_COLEMAK)
     ),
     [_MAC] = LAYOUT(
-        KC_ESC,   KC_1,   KC_2,    KC_3,    KC_4,    KC_5,                     KC_6,    KC_7,    KC_8,    KC_9,    KC_0,    KC_GRV,
-        KC_TAB,   KC_Q,   KC_W,    KC_E,    KC_R,    KC_T,                     KC_Y,    KC_U,    KC_I,    KC_O,    KC_P,    KC_MINS,
-        KC_LSFT,  KC_A,   KC_S,    KC_D,    KC_F,    KC_G,                     KC_H,    KC_J,    KC_K,    KC_L,    KC_SCLN, KC_QUOT,
-        KC_LCTL,  KC_Z,   KC_X,    KC_C,    KC_V,    KC_B, KC_LBRC,  KC_RBRC,  KC_N,    KC_M,    KC_COMM, KC_DOT,  KC_SLSH, KC_RSFT,
-                               KC_LOPT, MO(_LOWER),KC_LCMD,KC_SPC,   KC_ENT, KC_BSPC, MO(_RAISE), DF(_QWERTY)
+        KC_ESC,  KC_1,   KC_2,    KC_3,    KC_4,    KC_5,                     KC_6,    KC_7,    KC_8,    KC_9,    KC_0,    KC_EQL,
+        KC_TAB,  KC_Q,   KC_W,    KC_F,    KC_P,    KC_B,                     KC_J,    KC_L,    KC_U,    KC_Y,    KC_SCLN, KC_MINS,
+        KC_LSFT, KC_A,   KC_R,    KC_S,    KC_T,    KC_G,                     KC_M,    KC_N,    KC_E,    KC_I,    KC_O,    KC_QUOT,
+        KC_LOPT, KC_Z,   KC_X,    KC_C,    KC_D,    KC_V, KC_LBRC,  KC_RBRC,  KC_K,    KC_H,    KC_COMM, KC_DOT,  KC_SLSH, KC_RSFT,
+                              KC_LOPT, MO(_LOWER),RALT_T(KC_LALT),KC_SPC,   KC_ENT, KC_BSPC, MO(_RAISE), _______
     ),
     [_LOWER] = LAYOUT(
-        KC_GRV,  _______, _______, _______, _______, _______,                   _______, _______, _______,_______, _______, _______,
+        KC_GRV,  _______, _______, _______, _______, _______,                   _______, _______, _______,_______, _______, QK_BOOT,
         _______, _______, KC_VOLD, KC_MUTE, KC_VOLU, _______,                   _______, SELWORD, KC_UP,  CW_TOGG, _______, _______,
         _______, _______, KC_MPRV, KC_MPLY, KC_MNXT, _______,                   KC_CIRC, KC_LEFT, KC_DOWN,KC_RGHT, _______, _______,
-        _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______,_______, _______, KC_PIPE,
+        _______, _______, _______, _______, _______, _______,  DSKL,    DSKR,   _______, _______, _______,_______, _______, KC_PIPE,
                                    _______, _______, _______, _______, _______,  _______, _______, _______
     ),
     [_RAISE] = LAYOUT(
-        DF(_MAC),DF(_GAME),_______, _______, _______, _______,                     _______, _______, _______, _______, _______, KC_DEL, 
-        KC_CAPS, KC_1,    KC_2,    KC_3,    KC_4,    KC_5,                        _______, KC_HOME, KC_PGDN, KC_PGUP, KC_END,  KC_INS, 
+        _______,DF(_MAC),DF(_COLEMAK),_______, _______, _______,                     QK_BOOT, _______, _______, _______, _______, KC_DEL, 
+        KC_CAPS, _______,_______, _______, _______, _______,                      _______, KC_HOME, KC_PGDN, KC_PGUP, KC_END,  KC_INS, 
         KC_F1,   KC_F2,   KC_F3,   KC_F4,   KC_F5,   KC_F6,                       _______, KC_MS_L, KC_MS_D, KC_MS_U, KC_MS_R, _______, 
         KC_F7,   KC_F8,   KC_F9,   KC_F10,  KC_F11,  KC_F12,   KC_BTN1, KC_BTN2,  _______, _______, KC_WH_D, KC_WH_U, _______, _______, 
                                    _______, _______, _______,  _______, _______,  _______, _______, _______ 
+    ),
+    [_ADJUST] = LAYOUT(
+        KC_GRV,  _______, _______, _______, _______, _______,                   _______, _______, _______,_______, _______, QK_BOOT,
+        _______, _______, KC_VOLD, KC_MUTE, KC_VOLU, _______,                   _______, SELWORD, KC_UP,  CW_TOGG, _______, _______,
+        _______, _______, KC_MPRV, KC_MPLY, KC_MNXT, _______,                   KC_CIRC, KC_LEFT, KC_DOWN,KC_RGHT, _______, _______,
+        _______, _______, _______, _______, _______, _______,  DSKL,    DSKR,   _______, _______, _______,_______, _______, KC_PIPE,
+                                   _______, _______, _______, _______, _______,  _______, _______, _______
     ),
 };
 
@@ -442,15 +436,9 @@ static void display_primary_oled(void) {
     oled_set_cursor(0, 6);
 
     switch (get_highest_layer(layer_state|default_layer_state)) {
-        case _COLEMAK: 
-            oled_write("colmk", false);
-            break;
-        case _QWERTY:
-	        oled_write("qwert", false);
-	        break;
-        case _GAME:
-            oled_write("games", false);
-            break;            
+        case _COLEMAK:
+	        oled_write("colmk", false);
+	        break; 
         case _MAC:
             oled_write("macOS", false);
             break;
@@ -460,8 +448,11 @@ static void display_primary_oled(void) {
         case _RAISE:
             oled_write("raise", false);
             break; 
+        case _ADJUST:
+            oled_write("adjst", false);
+            break; 
         default:
-            oled_write("Undef", false);
+            oled_write("undef", false);
     }
 
     // Separator
@@ -537,6 +528,12 @@ bool process_record_user(uint16_t keycode, keyrecord_t* record) {
             } else {
                 isJumping = false;
             }
+            break;
+        case DSKL:
+            tap_code16(LGUI(LCTL(KC_LEFT)));
+            break;
+        case DSKR:
+            tap_code16(LGUI(LCTL(KC_RIGHT)));
             break;
     }
 
